@@ -1,16 +1,16 @@
 package com.example.android.viewerpager2withrx.DataModel;
 
 import com.google.auto.value.AutoValue;
+import com.google.auto.value.extension.serializable.SerializableAutoValue;
 import com.google.gson.annotations.SerializedName;
 import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
-
-import java.io.Serializable;
 import java.util.List;
 
 @GenerateTypeAdapter
 @AutoValue
+@SerializableAutoValue
 
-public abstract class CategoryDto implements Serializable {
+public abstract class CategoryDto {
     @SerializedName("region")
     public abstract String region();
 

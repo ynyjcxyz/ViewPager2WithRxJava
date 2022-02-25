@@ -4,28 +4,21 @@ import static android.widget.Toast.LENGTH_SHORT;
 import static com.example.android.viewerpager2withrx.DtoRepository.getDto;
 import static com.uber.autodispose.AutoDispose.autoDisposable;
 import static com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider.from;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Toast;
-
 import com.example.android.viewerpager2withrx.DataModel.BaseModel;
 import com.example.android.viewerpager2withrx.DataModel.CategoryDto;
 import com.example.android.viewerpager2withrx.Fragment.FirstFragment;
-import com.example.android.viewerpager2withrx.Fragment.FourthFragment;
-import com.example.android.viewerpager2withrx.Fragment.SecondFragment;
-import com.example.android.viewerpager2withrx.Fragment.ThirdFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -94,24 +87,9 @@ import io.reactivex.schedulers.Schedulers;
 //         System.out.println(landmarks);
 
          FirstFragment Fragment1 = new FirstFragment();
-         Bundle bundle = new Bundle();
-         bundle.putSerializable("landmarks", (Serializable) landmarks);
-         Fragment1.setArguments(bundle);
-
-         SecondFragment Fragment2 = new SecondFragment();
-         Bundle bundle2 = new Bundle();
-         bundle2.putSerializable("national_parks", (Serializable) national_parks);
-         Fragment2.setArguments(bundle2);
-
-         ThirdFragment Fragment3 = new ThirdFragment();
-         Bundle bundle3 = new Bundle();
-         bundle3.putSerializable("museums", (Serializable) museums);
-         Fragment3.setArguments(bundle3);
-
-         FourthFragment Fragment4 = new FourthFragment();
-         Bundle bundle4 = new Bundle();
-         bundle4.putSerializable("roadtrip", (Serializable) roadtrip);
-         Fragment4.setArguments(bundle4);
+         Bundle bundle1 = new Bundle();
+         bundle1.putSerializable("landmarks", (Serializable) landmarks);
+         Fragment1.setArguments(bundle1);
      }
 
      private void onError(Throwable throwable) {

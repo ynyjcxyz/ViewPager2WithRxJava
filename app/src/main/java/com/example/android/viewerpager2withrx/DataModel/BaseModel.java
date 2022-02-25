@@ -2,17 +2,18 @@ package com.example.android.viewerpager2withrx.DataModel;
 
 
 import com.google.auto.value.AutoValue;
+import com.google.auto.value.extension.serializable.SerializableAutoValue;
 import com.google.gson.annotations.SerializedName;
 import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
 
-import java.io.Serializable;
-
 @GenerateTypeAdapter
 @AutoValue
-public abstract class BaseModel implements Serializable {
+@SerializableAutoValue
+
+public abstract class BaseModel {
 
     @SerializedName("name")
-    public abstract String iconUrl();
+    public abstract String name();
 
     @SerializedName("image_url")
     public abstract String image_url();
