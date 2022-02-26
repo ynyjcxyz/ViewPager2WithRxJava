@@ -27,54 +27,60 @@ import io.reactivex.schedulers.Schedulers;
      public static List<BaseModel>  roadtrip;
 
      public static final String UUID = "f60dd98c-466f-44e7-a5dc-f5258dc4f513";
-    @Override
+     private TabLayout tabLayout;
+     private ViewPager2 viewPager;
+
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TabLayout tabLayout = findViewById(R.id.tab);
-        ViewPager2 viewPager = findViewById(R.id.viewpager);
+         tabLayout = findViewById(R.id.tab);
+         viewPager = findViewById(R.id.viewpager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Frag 1"), 0);
-        tabLayout.addTab(tabLayout.newTab().setText("Frag 2"), 1);
-        tabLayout.addTab(tabLayout.newTab().setText("Frag 3"), 2);
-        tabLayout.addTab(tabLayout.newTab().setText("Frag 4"), 3);
 
-        FragmentStateAdapter pagerAdapter =
-                new ScreenSlidePagerAdapter(MainActivity.this);
-        viewPager.setAdapter(pagerAdapter);
-
-        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-            if (position == 0) tab.setText("Frag 1");
-            if (position == 1) tab.setText("Frag 2");
-            if (position == 2) tab.setText("Frag 3");
-            if (position == 3) tab.setText("Frag 4");
-        }).attach();
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
-
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        viewPager.setCurrentItem(0);
-
-        bindData();
+         loadData();
     }
 
-     private void bindData() {
+     private void bindViewPager(CategoryDto dto) {
+         tabLayout.addTab(tabLayout.newTab().setText("Frag 1"), 0);
+         tabLayout.addTab(tabLayout.newTab().setText("Frag 2"), 1);
+         tabLayout.addTab(tabLayout.newTab().setText("Frag 3"), 2);
+         tabLayout.addTab(tabLayout.newTab().setText("Frag 4"), 3);
+
+         FragmentStateAdapter pagerAdapter =
+                 new ScreenSlidePagerAdapter(dto, MainActivity.this);
+         viewPager.setAdapter(pagerAdapter);
+
+         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+             if (position == 0) tab.setText("Frag 1");
+             if (position == 1) tab.setText("Frag 2");
+             if (position == 2) tab.setText("Frag 3");
+             if (position == 3) tab.setText("Frag 4");
+         }).attach();
+
+         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+
+             @Override
+             public void onTabSelected(TabLayout.Tab tab) {
+                 viewPager.setCurrentItem(tab.getPosition());
+             }
+
+             @Override
+             public void onTabUnselected(TabLayout.Tab tab) {
+
+             }
+
+             @Override
+             public void onTabReselected(TabLayout.Tab tab) {
+
+             }
+         });
+
+         viewPager.setCurrentItem(0);
+     }
+
+     private void loadData() {
          getDto(UUID)
                  .subscribeOn(Schedulers.io()) //for IO-bound work of network
                  .observeOn(AndroidSchedulers.mainThread())
@@ -83,16 +89,7 @@ import io.reactivex.schedulers.Schedulers;
      }
 
      private void onSuccess(CategoryDto categoryDto) {
-         landmarks = categoryDto.landmarks();
-         national_parks = categoryDto.national_parks();
-         museums = categoryDto.museums();
-         roadtrip = categoryDto.roadtrip();
-
-         FirstFragment firstFragment = new FirstFragment();
-         Bundle bundle = new Bundle();
-         System.out.println(landmarks);
-         bundle.putParcelableArrayList("landmarks", new ArrayList<>(landmarks));
-         firstFragment.setArguments(bundle);
+         bindViewPager(categoryDto);
      }
 
      private void onError(Throwable throwable) {
