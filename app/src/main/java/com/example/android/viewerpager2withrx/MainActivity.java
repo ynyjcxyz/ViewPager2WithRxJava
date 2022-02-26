@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.widget.Toast;
 import com.example.android.viewerpager2withrx.DataModel.BaseModel;
 import com.example.android.viewerpager2withrx.DataModel.CategoryDto;
@@ -92,7 +91,7 @@ import io.reactivex.schedulers.Schedulers;
          FirstFragment firstFragment = new FirstFragment();
          Bundle bundle = new Bundle();
          System.out.println(landmarks);
-         bundle.putParcelableArrayList("landmarks", (ArrayList<? extends Parcelable>) landmarks);
+         bundle.putParcelableArrayList("landmarks", new ArrayList<>(landmarks));
          firstFragment.setArguments(bundle);
      }
 
