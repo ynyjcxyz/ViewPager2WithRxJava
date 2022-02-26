@@ -6,7 +6,7 @@ import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-//https://run.mocky.io/v3/f60dd98c-466f-44e7-a5dc-f5258dc4f513
+//https://run.mocky.io/v3/e06909ca-66c3-4b35-adb6-4620bd889f6a
 public interface DataService {
     @GET("v3/{uuid}")
     Single<CategoryDto> retrofitService(@Path("uuid") String parameterUuid);

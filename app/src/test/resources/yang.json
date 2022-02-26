@@ -1,0 +1,33 @@
+{
+  "region": "California",
+  "landmarks": [
+    {
+      "name": "Golden Gate Bridge",
+      "image_url": "https://sierranewsonline.com/wp-content/uploads/2021/03/fi-SalmaccaroneGGBArtDecoTowers.jpg",
+      "tripadvisor_url": "https://www.tripadvisor.com/Attraction_Review-g60713-d104675-Reviews-Golden_Gate_Bridge-San_Francisco_California.html"
+    },
+    {
+      "name": "Hollywood Sign",
+      "image_url": "https://images.unsplash.com/photo-1594663805807-29a7cc1847c0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG9sbHl3b29kJTIwc2lnbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "tripadvisor_url": "https://www.tripadvisor.com/Attraction_Review-g32655-d144152-Reviews-Hollywood_Sign-Los_Angeles_California.html"
+    },
+    {
+      "name": "California State Capitol",
+      "image_url": "https://s.hdnux.com/photos/01/20/60/41/21170296/9/1200x0.jpg",
+      "tripadvisor_url": "https://www.tripadvisor.com/Attraction_Review-g32999-d219610-Reviews-California_State_Capitol_Museum-Sacramento_California.html"
+    }
+  ],
+  "national_parks": [
+    {
+      "name": "Yosemite National Park",
+      "image_url": "https://www.history.com/.image/ar_16:9%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTU3ODc4NjAwMjkxNzIyNTY5/yosemite-3.jpg",
+      "tripadvisor_url": "https://www.tripadvisor.com/Tourism-g61000-Yosemite_National_Park_California-Vacations.html"
+    },
+    {
+      "name": "Death Valley National Park",
+      "image_url": "https://national-park.com/wp-content/uploads/2016/04/Welcome-to-Death-Valley-National-Park.jpg",
+      "tripadvisor_url": "https://www.tripadvisor.com/Tourism-g143021-Death_Valley_National_Park_Inyo_County_California-Vacations.html"
+    },
+    {
+      "name": "Redwood National Park",
+      "image_url": "https://national-park.com/wp-content/uploads/2016/04/Welcome-to-Redwood-National-Park.jpg",
