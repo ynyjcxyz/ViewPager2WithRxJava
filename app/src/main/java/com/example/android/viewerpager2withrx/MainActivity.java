@@ -1,24 +1,22 @@
  package com.example.android.viewerpager2withrx;
 
-import static android.widget.Toast.LENGTH_SHORT;
-import static com.example.android.viewerpager2withrx.DtoRepository.getDto;
-import static com.uber.autodispose.AutoDispose.autoDisposable;
-import static com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider.from;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
-import android.os.Bundle;
-import android.widget.Toast;
-import com.example.android.viewerpager2withrx.DataModel.BaseModel;
-import com.example.android.viewerpager2withrx.DataModel.CategoryDto;
-import com.example.android.viewerpager2withrx.Fragment.FirstFragment;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
+ import static android.widget.Toast.LENGTH_SHORT;
+ import static com.example.android.viewerpager2withrx.DtoRepository.getDto;
+ import static com.uber.autodispose.AutoDispose.autoDisposable;
+ import static com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider.from;
 
-import java.util.ArrayList;
-import java.util.List;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+ import android.os.Bundle;
+ import android.widget.Toast;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.viewpager2.adapter.FragmentStateAdapter;
+ import androidx.viewpager2.widget.ViewPager2;
+ import com.example.android.viewerpager2withrx.DataModel.BaseModel;
+ import com.example.android.viewerpager2withrx.DataModel.CategoryDto;
+ import com.google.android.material.tabs.TabLayout;
+ import com.google.android.material.tabs.TabLayoutMediator;
+ import io.reactivex.android.schedulers.AndroidSchedulers;
+ import io.reactivex.schedulers.Schedulers;
+ import java.util.List;
 
  public class MainActivity extends AppCompatActivity {
      public static List<BaseModel> landmarks;
@@ -38,49 +36,62 @@ import io.reactivex.schedulers.Schedulers;
          tabLayout = findViewById(R.id.tab);
          viewPager = findViewById(R.id.viewpager);
 
+       initView();
 
          loadData();
     }
 
-     private void bindViewPager(CategoryDto dto) {
-         tabLayout.addTab(tabLayout.newTab().setText("Frag 1"), 0);
-         tabLayout.addTab(tabLayout.newTab().setText("Frag 2"), 1);
-         tabLayout.addTab(tabLayout.newTab().setText("Frag 3"), 2);
-         tabLayout.addTab(tabLayout.newTab().setText("Frag 4"), 3);
+   private void initView() {
+     initTab();
+     initListener();
+   }
 
-         FragmentStateAdapter pagerAdapter =
-                 new ScreenSlidePagerAdapter(dto, MainActivity.this);
-         viewPager.setAdapter(pagerAdapter);
+   private void bindViewPagerWithData(CategoryDto dto) {
+     FragmentStateAdapter pagerAdapter =
+         new ScreenSlidePagerAdapter(dto, MainActivity.this);
+     viewPager.setAdapter(pagerAdapter);
+     viewPager.setCurrentItem(0);
+     bindTab();
 
-         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-             if (position == 0) tab.setText("Frag 1");
-             if (position == 1) tab.setText("Frag 2");
-             if (position == 2) tab.setText("Frag 3");
-             if (position == 3) tab.setText("Frag 4");
-         }).attach();
+   }
 
-         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+   private void initListener() {
+     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
 
-             @Override
-             public void onTabSelected(TabLayout.Tab tab) {
-                 viewPager.setCurrentItem(tab.getPosition());
-             }
+           @Override
+           public void onTabSelected(TabLayout.Tab tab) {
+               viewPager.setCurrentItem(tab.getPosition());
+           }
 
-             @Override
-             public void onTabUnselected(TabLayout.Tab tab) {
+           @Override
+           public void onTabUnselected(TabLayout.Tab tab) {
 
-             }
+           }
 
-             @Override
-             public void onTabReselected(TabLayout.Tab tab) {
+           @Override
+           public void onTabReselected(TabLayout.Tab tab) {
 
-             }
-         });
+           }
+       });
+   }
 
-         viewPager.setCurrentItem(0);
-     }
+   private void bindTab() {
+     new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+         if (position == 0) tab.setText("Frag 1");
+         if (position == 1) tab.setText("Frag 2");
+         if (position == 2) tab.setText("Frag 3");
+         if (position == 3) tab.setText("Frag 4");
+     }).attach();
+   }
 
-     private void loadData() {
+   private void initTab() {
+     tabLayout.addTab(tabLayout.newTab().setText("Frag 1"), 0);
+     tabLayout.addTab(tabLayout.newTab().setText("Frag 2"), 1);
+     tabLayout.addTab(tabLayout.newTab().setText("Frag 3"), 2);
+     tabLayout.addTab(tabLayout.newTab().setText("Frag 4"), 3);
+   }
+
+   private void loadData() {
          getDto(UUID)
                  .subscribeOn(Schedulers.io()) //for IO-bound work of network
                  .observeOn(AndroidSchedulers.mainThread())
@@ -89,7 +100,8 @@ import io.reactivex.schedulers.Schedulers;
      }
 
      private void onSuccess(CategoryDto categoryDto) {
-         bindViewPager(categoryDto);
+       bindViewPagerWithData(categoryDto);
+
      }
 
      private void onError(Throwable throwable) {
