@@ -31,7 +31,8 @@ public class FirstFragment extends Fragment {
                              @Nullable Bundle bundle ){
         View rootView = inflater.inflate(R.layout.fragment, container, false);
 
-        landmarks = bundle != null ? bundle.getParcelableArrayList("landmarks") : null;
+        Bundle arguments = getArguments();
+        landmarks = arguments != null ? arguments.getParcelableArrayList("landmarks") : null;
         System.out.println(landmarks);
 
         recyclerView = rootView.findViewById(R.id.recycler_view);
