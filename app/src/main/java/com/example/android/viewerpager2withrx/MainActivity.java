@@ -16,13 +16,17 @@ import com.example.android.viewerpager2withrx.Fragment.FirstFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
  public class MainActivity extends AppCompatActivity {
+     public static List<BaseModel> landmarks;
+     public static List<BaseModel>  national_parks;
+     public static List<BaseModel>  museums;
+     public static List<BaseModel>  roadtrip;
+
      public static final String UUID = "f60dd98c-466f-44e7-a5dc-f5258dc4f513";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,8 @@ import io.reactivex.schedulers.Schedulers;
         tabLayout.addTab(tabLayout.newTab().setText("Frag 3"), 2);
         tabLayout.addTab(tabLayout.newTab().setText("Frag 4"), 3);
 
-        FragmentStateAdapter pagerAdapter = new ScreenSlidePagerAdapter(MainActivity.this);
+        FragmentStateAdapter pagerAdapter =
+                new ScreenSlidePagerAdapter(MainActivity.this);
         viewPager.setAdapter(pagerAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
@@ -79,22 +84,20 @@ import io.reactivex.schedulers.Schedulers;
      }
 
      private void onSuccess(CategoryDto categoryDto) {
-         List<BaseModel> landmarks = categoryDto.landmarks();
-         List<BaseModel> national_parks = categoryDto.national_parks();
-         List<BaseModel> museums = categoryDto.museums();
-         List<BaseModel> roadtrip = categoryDto.roadtrip();
+         landmarks = categoryDto.landmarks();
+         national_parks = categoryDto.national_parks();
+         museums = categoryDto.museums();
+         roadtrip = categoryDto.roadtrip();
 
-//         System.out.println(landmarks);
-
-         FirstFragment Fragment1 = new FirstFragment();
-         Bundle bundle1 = new Bundle();
-         bundle1.putSerializable("landmarks", (Serializable) landmarks);
-         Fragment1.setArguments(bundle1);
+         FirstFragment firstFragment = new FirstFragment();
+         Bundle bundle = new Bundle();
+         System.out.println(landmarks);
+         bundle.putParcelableArrayList("landmarks", (ArrayList<? extends Parcelable>) landmarks);
+         firstFragment.setArguments(bundle);
      }
 
      private void onError(Throwable throwable) {
          Toast.makeText(getApplication(), throwable.getMessage(), LENGTH_SHORT).show();
      }
-
 
  }

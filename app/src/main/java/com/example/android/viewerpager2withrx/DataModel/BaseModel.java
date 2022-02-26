@@ -1,16 +1,14 @@
 package com.example.android.viewerpager2withrx.DataModel;
 
-
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
-import com.google.auto.value.extension.serializable.SerializableAutoValue;
 import com.google.gson.annotations.SerializedName;
 import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
 
 @GenerateTypeAdapter
 @AutoValue
-@SerializableAutoValue
 
-public abstract class BaseModel {
+public abstract class BaseModel implements Parcelable {
 
     @SerializedName("name")
     public abstract String name();

@@ -1,16 +1,16 @@
 package com.example.android.viewerpager2withrx.DataModel;
 
+import android.os.Parcelable;
+
 import com.google.auto.value.AutoValue;
-import com.google.auto.value.extension.serializable.SerializableAutoValue;
 import com.google.gson.annotations.SerializedName;
 import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
 import java.util.List;
 
 @GenerateTypeAdapter
 @AutoValue
-@SerializableAutoValue
 
-public abstract class CategoryDto {
+public abstract class CategoryDto implements Parcelable {
     @SerializedName("region")
     public abstract String region();
 

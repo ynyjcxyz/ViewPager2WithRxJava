@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.viewerpager2withrx.DataModel.BaseModel;
+import com.example.android.viewerpager2withrx.MainActivity;
 import com.example.android.viewerpager2withrx.R;
 import com.example.android.viewerpager2withrx.RecyclerViewAdapter;
 
@@ -21,21 +22,23 @@ import java.util.List;
 import java.util.Objects;
 
 public class FirstFragment extends Fragment {
-    List<BaseModel> landmarks = new ArrayList<>();
+    private List<BaseModel> landmarks = new ArrayList<>();
     private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerAdapter;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle bundle ){
         View rootView = inflater.inflate(R.layout.fragment, container, false);
 
-        assert bundle != null;
-        landmarks = (List<BaseModel>) bundle.getSerializable("landmarks");
+        landmarks = bundle != null ? bundle.getParcelableArrayList("landmarks") : null;
+        System.out.println(landmarks);
 
         recyclerView = rootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-        recyclerView.setAdapter(new RecyclerViewAdapter(rootView.getContext(),landmarks));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerAdapter = new RecyclerViewAdapter(rootView.getContext(),landmarks);
+        recyclerView.setAdapter(recyclerAdapter);
 
         return rootView;
     }

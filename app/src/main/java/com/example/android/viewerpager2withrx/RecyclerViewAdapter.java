@@ -18,6 +18,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
     public RecyclerViewAdapter(Context context, List<BaseModel> itemList) {
         this.context = context;
         this.itemList = itemList;
+        notifyDataSetChanged();
     }
 
     public void setItemList(List<BaseModel> listAdd){
