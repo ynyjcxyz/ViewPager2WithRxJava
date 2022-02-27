@@ -1,6 +1,5 @@
 package com.example.android.viewerpager2withrx.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +9,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.android.viewerpager2withrx.DataModel.BaseModel;
-import com.example.android.viewerpager2withrx.MainActivity;
 import com.example.android.viewerpager2withrx.R;
 import com.example.android.viewerpager2withrx.RecyclerViewAdapter;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class FirstFragment extends Fragment {
     private List<BaseModel> landmarks = new ArrayList<>();
@@ -31,7 +25,7 @@ public class FirstFragment extends Fragment {
                              @Nullable Bundle bundle ){
         View rootView = inflater.inflate(R.layout.fragment, container, false);
 
-        landmarks = bundle != null ? bundle.getParcelableArrayList("landmarks") : null;
+        landmarks = getArguments() != null ? getArguments().getParcelableArrayList("landmarks") : null;
         System.out.println(landmarks);
 
         recyclerView = rootView.findViewById(R.id.recycler_view);
