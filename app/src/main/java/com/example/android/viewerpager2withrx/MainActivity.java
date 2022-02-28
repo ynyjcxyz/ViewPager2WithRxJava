@@ -4,17 +4,23 @@ import static android.widget.Toast.LENGTH_SHORT;
 import static com.example.android.viewerpager2withrx.DtoRepository.getDto;
 import static com.uber.autodispose.AutoDispose.autoDisposable;
 import static com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider.from;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
+
 import android.os.Bundle;
 import android.widget.Toast;
+
 import com.example.android.viewerpager2withrx.DataModel.CategoryDto;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
+    private final String[] fragmentTitles = new String[]
+            {"Landmarks", "National parks", "Museums", "RoadTrip"};
     public static final String UUID = "f60dd98c-466f-44e7-a5dc-f5258dc4f513";
     TabLayout tabLayout;
     ViewPager2 viewPager;
@@ -27,14 +33,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab);
         viewPager = findViewById(R.id.viewpager);
 
-        initView();
-        loadData();
-    }
-
-    private void initView() {
-        initTabLayout();
         initListener();
-
+        loadData();
     }
 
     private void initListener() {
@@ -54,13 +54,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initTabLayout() {
-        tabLayout.addTab(tabLayout.newTab().setText("Frag 1"), 0);
-        tabLayout.addTab(tabLayout.newTab().setText("Frag 2"), 1);
-        tabLayout.addTab(tabLayout.newTab().setText("Frag 3"), 2);
-        tabLayout.addTab(tabLayout.newTab().setText("Frag 4"), 3);
-    }
-
     private void loadData() {
         getDto(UUID)
                 .subscribeOn(Schedulers.io()) //for IO-bound work of network
@@ -73,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
         bindViewPagerWithData(categoryDto);
     }
 
+    private void onError(Throwable throwable) {
+        Toast.makeText(getApplication(), throwable.getMessage(), LENGTH_SHORT).show();
+    }
+
     private void bindViewPagerWithData(CategoryDto categoryDto) {
         viewPager.setAdapter(new ScreenSlidePagerAdapter(categoryDto, this));
         viewPager.setCurrentItem(0);
@@ -80,16 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bindTab() {
-        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-            if (position == 0) tab.setText("Frag 1");
-            if (position == 1) tab.setText("Frag 2");
-            if (position == 2) tab.setText("Frag 3");
-            if (position == 3) tab.setText("Frag 4");
-        }).attach();
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) ->
+                tab.setText(fragmentTitles[position])).attach();
     }
-
-    private void onError(Throwable throwable) {
-        Toast.makeText(getApplication(), throwable.getMessage(), LENGTH_SHORT).show();
-    }
-
 }

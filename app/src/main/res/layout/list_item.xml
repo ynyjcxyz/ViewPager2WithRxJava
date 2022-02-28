@@ -9,7 +9,7 @@
         android:id="@+id/title_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitCenter"
+        android:scaleType="center"
         android:adjustViewBounds="true" />
 
     <TextView
@@ -17,12 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textSize="36sp"
-        android:shadowDx="1.0"
-        android:shadowDy="1.0"
-        android:shadowRadius="2.0"
-        android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/white"/>
+        android:textSize="34sp"
+        android:textColor="@color/white"
+        style="@style/AudioFileInfoOverlayText"/>
 
 </RelativeLayout>

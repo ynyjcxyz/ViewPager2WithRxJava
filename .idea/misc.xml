@@ -3,12 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android_Interface/ViewerPager2WithRx/app/src/main/res/layout/activity_main.xml" value="0.35507246376811596" />
+        <entry key="..\:/Android_Interface/ViewerPager2WithRx/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Android_Interface/ViewerPager2WithRx/app/src/main/res/layout/fragment.xml" value="0.18" />
         <entry key="..\:/Android_Interface/ViewerPager2WithRx/app/src/main/res/layout/fragment1.xml" value="0.416213768115942" />
         <entry key="..\:/Android_Interface/ViewerPager2WithRx/app/src/main/res/layout/fragment2.xml" value="0.416213768115942" />
         <entry key="..\:/Android_Interface/ViewerPager2WithRx/app/src/main/res/layout/fragment3.xml" value="0.416213768115942" />
-        <entry key="..\:/Android_Interface/ViewerPager2WithRx/app/src/main/res/layout/list_item.xml" value="0.22" />
+        <entry key="..\:/Android_Interface/ViewerPager2WithRx/app/src/main/res/layout/list_item.xml" value="0.25" />
       </map>
     </option>
   </component>
