@@ -11,6 +11,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.codeboy.pager2_transformers.Pager2_AccordionTransformer;
+import com.codeboy.pager2_transformers.Pager2_AntiClockSpinTransformer;
+import com.codeboy.pager2_transformers.Pager2_BackDrawTransformer;
 import com.example.android.viewerpager2withrx.DataModel.CategoryDto;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -32,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tab);
         viewPager = findViewById(R.id.viewpager);
+
+        viewPager.setPageTransformer(new Pager2_BackDrawTransformer());
 
         initListener();
         loadData();

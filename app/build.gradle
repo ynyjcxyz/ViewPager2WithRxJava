@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.CodeBoy722:ViewPager2_Transformers:1.0.0'
+
     annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.9'
 // Optionally for TypeAdapter support
     implementation 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.9'
